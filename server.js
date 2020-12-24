@@ -1,4 +1,4 @@
-const tracer = require('./tracer')("test-tracer");
+const tracer = require('./tracer')("front-end", process.env.OTLP_ENDPOINT);
 var request = require("request")
   , express = require("express")
   , morgan = require("morgan")

@@ -1,7 +1,9 @@
 IMAGE=front-end
 DOCKER_IFLAG := $(if $(GITHUB_ACTIONS),"-i","-it")
 
-.PHONY: test coverage
+.PHONY: test coverage docker
+
+default: docker
 
 up: compose test-image deps server
 
@@ -38,6 +40,9 @@ server:
 clean:
 	@if [ $$(docker ps -a -q -f name=$(IMAGE) | wc -l) -ge 1 ]; then docker rm -f $(IMAGE); fi
 	@if [ $$(docker images -q $(IMAGE) | wc -l) -ge 1 ]; then docker rmi $(IMAGE); fi
+
+docker:
+	@docker build -t sls-microservices/front-end  .
 
 # Builds the Docker image used for running tests
 test-image:

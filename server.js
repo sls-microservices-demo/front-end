@@ -17,6 +17,7 @@ var request = require("request")
   , app = express()
 
 
+require('events').EventEmitter.defaultMaxListeners = 100;
 app.use(helpers.rewriteSlash);
 app.use(metrics);
 app.use(express.static("public"));
